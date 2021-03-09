@@ -42,14 +42,61 @@ self.addEventListener("activate", (event) => {
             )
         })
     )
-})
+    self.clients.claim();
+});
 
 // Fetch Event
 self.addEventListener("fetch", (event) => {
     console.log("Service Worker Fetching!");
 
+    if (event.request.url.includes("/api/")) {
+        event.respondWith(
+            caches.open(DATA_CACHE_NAME)
+            .then((cache) => {
+                fetch(event.request).then((res) => {
+                    let resClone = res.clone();
+                    if(res.status === 200) {
+                        cache.put(event.request, resClone);
+                    }
+                    return res;
+                })
+                .catch((err) => {
+                    cache.match(event.request);
+                })
+            }).catch((err) => {
+                console.log(err);
+            })
+        );
+        return;
+    }
+
     event.respondWith(
-        fetch(event.request)
-        .catch(() => {caches.match(event.request)})
+        caches.open(CACHE_NAME)
+        .then(async (cache) => {
+            const res = await cache.match(event.request);
+            return res || fetch(event.request);
+        })
     )
+
+    /*if (event.request.url.includes("/api/")) {
+        event.respondWith(
+            fetch(event.request)
+                .then((res) => {
+                    let resClone = res.clone();
+                    caches.open(CACHE_NAME)
+                        .then((cache) => {
+                            cache.put(event.request, resClone);
+                        });
+                    return res;
+                }).catch((err) => {
+                    cache.match(event.request)
+                        .then((res) => {
+                            res;
+                        })
+                })
+        )
+    }*/
+
+    // Check what is going on with the api/transaction because now I can see data-cache-v1
+    // data-cache-v1 is holding most of my data that was in the mongodb table
 })
