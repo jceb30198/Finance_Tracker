@@ -9,6 +9,7 @@ const config = {
     },
     plugins: [
         new WebpackPwaManifest({
+            name: "Finance Tracker",
             
         })
     ]
