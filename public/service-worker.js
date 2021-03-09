@@ -17,7 +17,7 @@ self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
         .then((cache) => {
-            console.log("Service Working Caching Files");
+            console.log("Service Working Caching Files.");
             cache.addAll(CACHE_FILES);
         })
         .then(() => {
@@ -28,5 +28,28 @@ self.addEventListener("install", (event) => {
 
 // Activate Event
 self.addEventListener("activate", (event) => {
-    console.log("Service Worker Activated");
+    console.log("Service Worker Activated!");
+    
+    event.waitUntil(
+        caches.keys().then((cacheList) => {
+            return Promise.all(
+                cacheList.map((cache) => {
+                    if(cache !== CACHE_NAME && cache !== DATA_CACHE_NAME) {
+                        console.log("Service Worker Clearing Previous Cache.");
+                        return caches.delete(cache);
+                    }
+                })
+            )
+        })
+    )
+})
+
+// Fetch Event
+self.addEventListener("fetch", (event) => {
+    console.log("Service Worker Fetching!");
+
+    event.respondWith(
+        fetch(event.request)
+        .catch(() => {caches.match(event.request)})
+    )
 })
