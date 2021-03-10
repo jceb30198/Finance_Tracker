@@ -78,25 +78,4 @@ self.addEventListener("fetch", (event) => {
         })
     )
 
-    /*if (event.request.url.includes("/api/")) {
-        event.respondWith(
-            fetch(event.request)
-                .then((res) => {
-                    let resClone = res.clone();
-                    caches.open(CACHE_NAME)
-                        .then((cache) => {
-                            cache.put(event.request, resClone);
-                        });
-                    return res;
-                }).catch((err) => {
-                    cache.match(event.request)
-                        .then((res) => {
-                            res;
-                        })
-                })
-        )
-    }*/
-
-    // Check what is going on with the api/transaction because now I can see data-cache-v1
-    // data-cache-v1 is holding most of my data that was in the mongodb table
-})
+});
