@@ -3,15 +3,23 @@ let myChart;
 
 fetch("/api/transaction")
   .then(response => {
-    return response.json();
+    if (response.ok) {
+      console.log(response);
+      return response.json();
+    }else {
+      return Promise.reject(response);
+    }
   })
   .then(data => {
     // save db data on global variable
-    transactions = data;
-
-    populateTotal();
-    populateTable();
-    populateChart();
+    if (data) {
+      console.log(data);
+      transactions = data;
+      
+      populateTotal();
+      populateTable();
+      populateChart();
+    }
   });
 
 function populateTotal() {
