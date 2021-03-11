@@ -23,6 +23,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
 // routes
 app.use(require("./routes/api.js"));
 
+// Do not use "build" for the webpack watch script when trying to deploy on heroku.
+
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
