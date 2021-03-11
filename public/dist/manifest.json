@@ -1,0 +1,22 @@
+{
+  "icons": [
+    {
+      "src": "auto/icon_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "auto/icon_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "Finance Tracker",
+  "short_name": "Finance Trckr",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": "/",
+  "description": "Progressive Web App that helps track finances.",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
