@@ -10,8 +10,6 @@ const CACHE_FILES = [
     "/icons/icon-512x512.png",
     "dist/bundle.js",
     "dist/manifest.json",
-    "dist/auto/icon-192x192.png",
-    "dist/auto/icon-512x512.png"
 ];
 
 // Install Event
