@@ -17,10 +17,10 @@ A web application that allows the user to keep track of their finances. The appl
 ### Screenshot
 
 - This is the landing page for the finance tracker.
-![Plain Graph](./images/landing_page.png)
+![Plain Graph](./images/landing_page.PNG)
 
 - Once the user adds multiple transactions a graph begins to form.
-![Filled Graph](./images/graph.png)
+![Filled Graph](./images/graph.PNG)
 
 ### Links
 
